@@ -35,7 +35,7 @@ def load_data(database_filepath):
     Input: Database path
 
     Output: Two dataframes, one for features, the other one for targets, also categories name
-    """"
+    """
     engine = create_engine('sqlite:///{}'.format(database_filepath))   
     df=pd.read_sql_query('SELECT * FROM DisasterResponse',engine)
     df.reset_index(drop=True, inplace=True)
@@ -54,7 +54,7 @@ def tokenize(text):
     Input: Raw text
 
     Output: Text after processing
-    """"
+    """
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     text = word_tokenize(text)
     text = [w for w in text if w not in stopwords.words('english')]
@@ -64,13 +64,13 @@ def tokenize(text):
 
 def build_model():
 
-    """"
+    """
     Build_model function build up the Logistic Regression model using Pipleine, and GridSearch
 
     Input: None
 
     Output: Logistic Regression Model
-    """"
+    """
     LR=LogisticRegression(max_iter=10000)
 
         # Pipline that include Tfidf and OVR
@@ -86,14 +86,14 @@ def build_model():
 
 def evaluate_model(model, X_test, Y_test, category_names):
 
-    """"
+    """
     evaluate_model funciton printout report about perfomance of with model
 
     Input: Machine Learning Model, the whole test set, and the category names
 
     Output: Print about each metric in the classifier
 
-    """"
+    """
     y_pred = model.predict(X_test)
 
     print(classification_report(Y_test, y_pred, target_names=category_names))

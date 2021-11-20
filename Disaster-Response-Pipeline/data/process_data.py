@@ -9,7 +9,7 @@ def load_data(messages_filepath, categories_filepath):
     Input: csv files path
 
     Output: merged dataframe from two dataframes, one for messages, the other one for categories
-    """"
+    """
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = messages.merge(categories,on = 'id')
@@ -20,13 +20,13 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
 
-    """"
+    """
     clean_data function makes preprocessing in the dataframe to make it more interpretable to Machine Learning Model
 
     Input: Uncleand dataframe
 
     Output: Cleaned dataframe 
-    """"
+    """
     categories = df['categories'].str.split(';', expand=True)
     categories.rename(columns=categories.iloc[0], inplace = True)
     categories.rename(columns = lambda x : str(x)[:-2], inplace = True)
@@ -49,7 +49,7 @@ def clean_data(df):
 
     
 def save_data(df, database_filename):
-       """
+    """
     save_data function, it saves the dataframe as (database)
 
     Input: dataframe, and the database path
